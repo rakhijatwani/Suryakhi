@@ -4,194 +4,137 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Suryakhi
+  
 </title>
 
 <style>
 /* --- GLOBAL STYLES --- */
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: #f8f8f8;
-}
-
-/* HEADER */
-header {
-    background: linear-gradient(135deg, #e91e63, #6a1b9a);
-    padding: 30px;
-    color: white;
-    text-align: center;
-}
-
-h1 { margin-bottom: 5px; }
-
-/* PRODUCT GALLERY */
-.gallery {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 25px;
-    padding: 30px;
-}
-
-.product {
-    background: white;
-    padding: 15px;
-    border-radius: 12px;
-    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
-}
-
-.product img {
-    width: 100%;
-    height: 260px;
-    object-fit: cover;
-    border-radius: 10px;
-}
-
-.order-btn {
-    background: #e91e63;
-    padding: 10px;
-    border-radius: 8px;
-    color: white;
-    text-align: center;
-    display: block;
-    margin-top: 10px;
-    text-decoration: none;
-}
-
-/* UPLOAD SECTION */
-.upload-section {
-    background: white;
-    width: 90%;
-    max-width: 600px;
-    margin: 20px auto;
-    padding: 20px;
-    border-radius: 12px;
-    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
-}
-
-input, textarea {
-    width: 100%;
-    padding: 12px;
-    border-radius: 8px;
-    margin-top: 10px;
-    border: 1px solid #ccc;
-}
-
-button {
-    width: 100%;
-    padding: 14px;
-    margin-top: 15px;
-    background: #6a1b9a;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-size: 16px;
-}
-
-/* FOOTER */
-footer {
-    background: #111;
-    color: white;
-    text-align: center;
-    padding: 20px;
-    margin-top: 40px;
-}
+body { margin:0; font-family: Arial, sans-serif; background:#f8f8f8; }
+header { background:#6a1b9a; color:white; padding:20px; display:flex; justify-content:space-between; align-items:center; }
+header h1 { margin:0; }
+nav a { color:white; text-decoration:none; margin-left:15px; font-weight:bold; cursor:pointer; }
+nav a:hover { text-decoration:underline; }
+.admin-btn { background:black; color:white; border:none; padding:8px 15px; border-radius:8px; cursor:pointer; }
+.gallery { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:20px; padding:20px; }
+.product { background:white; padding:15px; border-radius:10px; box-shadow:0 2px 10px rgba(0,0,0,0.1); position:relative; }
+.product img { width:70%; height:300px; object-fit:cover; border-radius:10px; }
+.product h3 { margin:10px 0 5px 0; }
+.product p { margin:5px 0; }
+.delete-btn { background:#d32f2f; color:white; border:none; padding:8px; margin-top:10px; width:100%; border-radius:8px; cursor:pointer; font-size:14px; display:none; }
+.delete-btn.show { display:block; }
+.upload-section { background:white; width:90%; max-width:600px; margin:20px auto; padding:20px; border-radius:12px; box-shadow:0 3px 10px rgba(0,0,0,0.1); display:none; }
+input, textarea { width:100%; padding:12px; border-radius:8px; margin-top:10px; border:1px solid #ccc; }
+button { width:100%; padding:14px; margin-top:15px; background:#6a1b9a; color:white; border:none; border-radius:8px; font-size:16px; cursor:pointer; }
+footer { background:#ffb0b0; color:white; text-align:center; padding:20px; margin-top:40px; }
+footer a { color:#e91e63; text-decoration:none; margin:0 8px; }
 </style>
 </head>
 <body>
 
 <header>
-    <h1>Suryakhi</h1>
-    <p>Trendy • Affordable • Stylish</p>
+<h1>Suryakhi</h1>
+<div>
+<a href="#home">Home</a>
+<button class="admin-btn" onclick="adminLogin()">Admin</button>
+</div>
 </header>
 
-<h2 style="text-align:center; margin-top:30px;">Our Collection</h2>
-
+<h2 style="text-align:center; margin-top:20px;">Our Collection</h2>
 <div class="gallery" id="productGallery"></div>
 
-<!-- UPLOAD SECTION (Fully functional) -->
-<div class="upload-section">
-    <h2>Upload New Product</h2>
-
-    <input type="file" id="imageInput" accept="image/*">
-    <input type="text" id="nameInput" placeholder="Product Name">
-    <input type="text" id="priceInput" placeholder="Price">
-    <textarea id="descriptionInput" placeholder="Product Description"></textarea>
-
-    <button onclick="addProduct()">Add Product</button>
+<!-- Admin Upload Section -->
+<div class="upload-section" id="uploadSection">
+<h2>Add New Product</h2>
+<input type="file" id="imageInput" accept="image/*">
+<input type="text" id="nameInput" placeholder="Product Name">
+<input type="text" id="priceInput" placeholder="Price">
+<textarea id="descriptionInput" placeholder="Product Description"></textarea>
+<button onclick="addProduct()">Add Product</button>
 </div>
 
 <footer>
-    <footer>
-    <p>Contact: +91 8949114626</p>
-
-    <p class="social">
-        <!-- Update these links with your real account URLs -->
-        <a href="https://instagram.com/Rakhi_jatwani" target="_blank">Instagram</a> |
-        <a href="https://facebook.com/YOUR_USERNAME" target="_blank">Facebook</a> |
-        <a href="https://wa.me/8949114626" target="_blank">WhatsApp</a>
-    </p>
-
-    <p>© 2025 Suryakhi</p>
-    <P> <h6>Rakhi jatwani</h6> </P>
-</footer>
-
+<p>Contact: 8949114626</p>
+<p>
+<a href="https://instagram.com/YOUR_USERNAME" target="_blank">Instagram</a> |
+<a href="https://facebook.com/YOUR_USERNAME" target="_blank">Facebook</a> |
+<a href="https://wa.me/8949114626" target="_blank">WhatsApp</a>
+</p>
+<p>© 2025 Suryakhi
+    <h6>Rakhi jatwani</h6>
+</p>
 </footer>
 
 <script>
-// Load saved products
-document.addEventListener("DOMContentLoaded", loadProducts);
+let adminLoggedIn = false;
 
+// Admin login popup
+function adminLogin() {
+    const pass = prompt("Enter Admin Password:");
+    if(pass === "sakhi") { // CHANGE THIS PASSWORD
+        adminLoggedIn = true;
+        document.getElementById("uploadSection").style.display = "block";
+        // Show delete buttons
+        document.querySelectorAll(".delete-btn").forEach(btn => btn.classList.add("show"));
+        alert("Admin mode activated!");
+    } else {
+        alert("Incorrect password!");
+    }
+}
+
+// Load products from LocalStorage
+function loadProducts() {
+    const gallery = document.getElementById("productGallery");
+    const products = JSON.parse(localStorage.getItem("products")) || [];
+    gallery.innerHTML = '';
+    products.forEach(product => {
+        const div = document.createElement("div");
+        div.classList.add("product");
+        div.innerHTML = `
+            <img src="${product.image}">
+            <h3>${product.name}</h3>
+            <p>Price: ₹${product.price}</p>
+            <p>${product.description}</p>
+            <button class="delete-btn" onclick="deleteProduct(${product.id})">Delete</button>
+        `;
+        gallery.appendChild(div);
+    });
+}
+
+// Add product (admin only)
 function addProduct() {
+    if(!adminLoggedIn) { alert("Admin login required"); return; }
     const imageFile = document.getElementById("imageInput").files[0];
     const name = document.getElementById("nameInput").value;
     const price = document.getElementById("priceInput").value;
     const description = document.getElementById("descriptionInput").value;
-
-    if (!imageFile || !name || !price) {
-        alert("Please fill all fields!");
-        return;
-    }
-
+    if(!imageFile || !name || !price) { alert("Please fill all fields"); return; }
     const reader = new FileReader();
     reader.onload = function(e) {
         const product = {
+            id: Date.now(),
             image: e.target.result,
             name: name,
             price: price,
             description: description
         };
-
         let products = JSON.parse(localStorage.getItem("products")) || [];
         products.push(product);
         localStorage.setItem("products", JSON.stringify(products));
-
-        displayProduct(product);
+        loadProducts();
     };
-
     reader.readAsDataURL(imageFile);
 }
 
-function loadProducts() {
-    const products = JSON.parse(localStorage.getItem("products")) || [];
-    products.forEach(displayProduct);
+// Delete product (admin only)
+function deleteProduct(id) {
+    if(!adminLoggedIn) { alert("Admin login required"); return; }
+    let products = JSON.parse(localStorage.getItem("products")) || [];
+    products = products.filter(p => p.id !== id);
+    localStorage.setItem("products", JSON.stringify(products));
+    loadProducts();
 }
 
-function displayProduct(product) {
-    const gallery = document.getElementById("productGallery");
-
-    const div = document.createElement("div");
-    div.classList.add("product");
-
-    div.innerHTML = `
-        <img src="${product.image}">
-        <h3>${product.name}</h3>
-        <p>Price: ₹${product.price}</p>
-        <p>${product.description}</p>
-        <a class="order-btn" href="#order">Order Now</a>
-    `;
-
-    gallery.appendChild(div);
-}
+document.addEventListener("DOMContentLoaded", loadProducts);
 </script>
 
 </body>
