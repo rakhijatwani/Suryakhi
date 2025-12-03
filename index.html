@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Suryakhi
+    <p></p>
+</title>
+
+<style>
+/* --- GLOBAL STYLES --- */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f8f8f8;
+}
+
+/* HEADER */
+header {
+    background: linear-gradient(135deg, #e91e63, #6a1b9a);
+    padding: 30px;
+    color: white;
+    text-align: center;
+}
+
+h1 { margin-bottom: 5px; }
+
+/* PRODUCT GALLERY */
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 25px;
+    padding: 30px;
+}
+
+.product {
+    background: white;
+    padding: 15px;
+    border-radius: 12px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+}
+
+.product img {
+    width: 100%;
+    height: 260px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.order-btn {
+    background: #e91e63;
+    padding: 10px;
+    border-radius: 8px;
+    color: white;
+    text-align: center;
+    display: block;
+    margin-top: 10px;
+    text-decoration: none;
+}
+
+/* UPLOAD SECTION */
+.upload-section {
+    background: white;
+    width: 90%;
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+}
+
+input, textarea {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    margin-top: 10px;
+    border: 1px solid #ccc;
+}
+
+button {
+    width: 100%;
+    padding: 14px;
+    margin-top: 15px;
+    background: #6a1b9a;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+}
+
+/* FOOTER */
+footer {
+    background: #111;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    margin-top: 40px;
+}
+</style>
+</head>
+<body>
+
+<header>
+    <h1>Suryakhi</h1>
+    <p>Trendy • Affordable • Stylish</p>
+</header>
+
+<h2 style="text-align:center; margin-top:30px;">Our Collection</h2>
+
+<div class="gallery" id="productGallery"></div>
+
+<!-- UPLOAD SECTION (Fully functional) -->
+<div class="upload-section">
+    <h2>Upload New Product</h2>
+
+    <input type="file" id="imageInput" accept="image/*">
+    <input type="text" id="nameInput" placeholder="Product Name">
+    <input type="text" id="priceInput" placeholder="Price">
+    <textarea id="descriptionInput" placeholder="Product Description"></textarea>
+
+    <button onclick="addProduct()">Add Product</button>
+</div>
+
+<footer>
+    <footer>
+    <p>Contact: +91 8949114626</p>
+
+    <p class="social">
+        <!-- Update these links with your real account URLs -->
+        <a href="https://instagram.com/Rakhi_jatwani" target="_blank">Instagram</a> |
+        <a href="https://facebook.com/YOUR_USERNAME" target="_blank">Facebook</a> |
+        <a href="https://wa.me/8949114626" target="_blank">WhatsApp</a>
+    </p>
+
+    <p>© 2025 Suryakhi</p>
+    <P> <h6>Rakhi jatwani</h6> </P>
+</footer>
+
+</footer>
+
+<script>
+// Load saved products
+document.addEventListener("DOMContentLoaded", loadProducts);
+
+function addProduct() {
+    const imageFile = document.getElementById("imageInput").files[0];
+    const name = document.getElementById("nameInput").value;
+    const price = document.getElementById("priceInput").value;
+    const description = document.getElementById("descriptionInput").value;
+
+    if (!imageFile || !name || !price) {
+        alert("Please fill all fields!");
+        return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        const product = {
+            image: e.target.result,
+            name: name,
+            price: price,
+            description: description
+        };
+
+        let products = JSON.parse(localStorage.getItem("products")) || [];
+        products.push(product);
+        localStorage.setItem("products", JSON.stringify(products));
+
+        displayProduct(product);
+    };
+
+    reader.readAsDataURL(imageFile);
+}
+
+function loadProducts() {
+    const products = JSON.parse(localStorage.getItem("products")) || [];
+    products.forEach(displayProduct);
+}
+
+function displayProduct(product) {
+    const gallery = document.getElementById("productGallery");
+
+    const div = document.createElement("div");
+    div.classList.add("product");
+
+    div.innerHTML = `
+        <img src="${product.image}">
+        <h3>${product.name}</h3>
+        <p>Price: ₹${product.price}</p>
+        <p>${product.description}</p>
+        <a class="order-btn" href="#order">Order Now</a>
+    `;
+
+    gallery.appendChild(div);
+}
+</script>
+
+</body>
+</html>
